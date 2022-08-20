@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+{% load table_utils %}
+
+{% block content %}
+    <script>
+        sort = function (element) {
+            const searchTerm = $(element).val().toLowerCase();
+            $('#machine-status-table tbody tr').each(function () {
+                const lineStr = $(this).text().toLowerCase();
+                if (lineStr.indexOf(searchTerm) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('#search-bar').on('keyup', function () {
+                sort(this)
+            })
+        });
+        $(document).ready(() => setInterval(() => {
+                $.ajax({
+                    url: "../raw/{{ device.id }}"
+                }).done((data) => {
+                    $("#machine-status-table tbody")
+                        .children("tr")
+                        .each(function (index) {
+                            $(this)
+                                .children(".value-col")
+                                .each(function () {
+                                    $(this).html(data.val[index])
+                                })
+                        })
+                    sort($('#search-bar'))
+                })
+            }, 250)
+        );
+    </script>
+    <div class="home-title-background">
+          <span class="home-title">
+            <span class="home-text">{{ device.name }} State</span>
+          </span>
+    </div>
+
+    <div>
+        <input type="text" class="search" id="search-bar" placeholder="Filter text">
+    </div>
+
+    <div class="embed-table">
+        <table id="machine-status-table">
+            <thead>
+            <tr>
+                <th> Key</th>
+                {% for heading_key, heading_value in headers.items %}
+                    <th> {{ heading_value }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for datapoint_name, datapoint_value in data.items %}
+                <tr>
+                    <td style="width: {{ headers|get_width_percent }}%">{{ datapoint_name }}</td>
+                    {% for header in headers %}
+                        <td {% if header == 'value' %} class='value-col' {% endif %}
+                                                       style="width: {{ headers|get_width_percent }}%">{{ datapoint_value|get_item:header }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

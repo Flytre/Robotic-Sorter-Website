@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="home-title-background">
+          <span class="home-title">
+            <span class="home-text">Machine Status</span>
+          </span>
+    </div>
+    <div id="home-grid">
+        {% for device in devices %}
+            {% if device.connected %}
+                <div class="home-grid-entry clickable" onclick="window.location.href='./devices/{{ device.id }}';">
+                    <div class="machine-name vertical-align-text">{{ device.name }}</div>
+                    <div class="machine-connection vertical-align-text">Connected
+                        at {{ device.ip }}:{{ device.port }}</div>
+                </div>
+            {% else %}
+                <div class="home-grid-entry">
+                    <div class="machine-name vertical-align-text">{{ device.name }}</div>
+                    <div class="machine-connection vertical-align-text">No connection</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+

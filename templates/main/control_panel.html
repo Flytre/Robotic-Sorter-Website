@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            function set_logging(state) {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'set-logging' %}",
+                    data: {
+                        "logging": state
+                    },
+                    complete: (data) => {
+                        $('#logging-state').text("Logging: " + data['responseJSON']['logging'])
+                    },
+                    "dataType": "json"
+                });
+            }
+
+
+            $('#turn-logging-on').click(e => set_logging(true));
+            $('#turn-logging-off').click(e => set_logging(false));
+
+            $("#reconnect-devices").click(e => {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'reconnect-devices' %}"
+                });
+            })
+
+        })
+
+    </script>
+
+    <div class="home-title-background">
+          <span class="home-title">
+            <span class="home-text">Control Panel</span>
+          </span>
+    </div>
+    <div class="control-section">
+        <h2 id="logging-state"> Logging: {{ logging }} </h2>
+        <div class="two-column-layout">
+            <div class="two-column-col">
+                <div id="turn-logging-on" class="toggle-button toggle-on">
+                    <span>Turn Logging On</span>
+                </div>
+            </div>
+            <div class="two-column-col">
+                <div id="turn-logging-off" class="toggle-button toggle-off">
+                    <span>Turn Logging Off</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-section">
+        <div id="reconnect-devices" class="toggle-button reconnect">
+            <span>Reconnect Devices</span>
+        </div>
+    </div>
+{% endblock %}
+

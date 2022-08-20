@@ -1,0 +1,107 @@
+{
+  "entries": [
+    {
+      "name": "Skill Boss Logistics",
+      "id": "skill-boss-logistics",
+      "type": "pi-plc-server",
+      "ip": "192.168.2.5",
+      "port": "1233"
+    },
+    {
+      "name": "Qarm - Brown",
+      "id": "qarm-brown",
+      "type": "qarm",
+      "ip": "192.168.2.119",
+      "port": "18001"
+    },
+    {
+      "name": "Rotatory",
+      "id": "rotatory",
+      "type": "rotatory",
+      "ip": "192.168.2.64",
+      "port": "18001"
+    },
+    {
+      "name": "Qbot - Green",
+      "id": "qbot-green",
+      "type": "qbot",
+      "ip": "192.168.2.25",
+      "port": "18001"
+    }
+  ],
+  "datapoints": {
+    "qarm": [
+      "state",
+      "x",
+      "y",
+      "z",
+      "gemma",
+      "gripper(%)",
+      "phi(base)",
+      "phi(shoulder)",
+      "phi(elbow)",
+      "phi(wrist)",
+      "velocity(base)",
+      "velocity(shoulder)",
+      "velocity(elbow)",
+      "velocity(wrist)",
+      "PWM(base)",
+      "PWM(shoulder)",
+      "PWM(elbow)",
+      "PWM(wrist)",
+      "current(base)",
+      "current(shoulder)",
+      "current(elbow)",
+      "current(wrist)",
+      "current(gripper)",
+      "temperature(base)",
+      "temperature(shoulder)",
+      "temperature(elbow)",
+      "temperature(wrist)",
+      "gripperVelocity",
+      "gripperTemperature",
+      "GripperPWM",
+      "Base RGB LED - Red",
+      "Base RGB LED - Green",
+      "Base RGB Led - Blue",
+      "Arm Red Led"
+    ],
+    "rotatory": [
+      "state",
+      "rotation"
+    ],
+    "qbot": [
+      "State",
+      "x",
+      "y",
+      "Theta",
+      "Battery Voltage",
+      "Right Motor Current",
+      "Left Motor Current",
+      "Right Encoder",
+      "Left Encoder",
+      "Right Bumper",
+      "Central Bumper",
+      "Left Bumper",
+      "Right Wheel Drop",
+      "Left Wheel Drop",
+      "Right Cliff",
+      "Central Cliff",
+      "Left Cliff",
+      "Button 0",
+      "Button 1",
+      "Button 2",
+      "Right Overcurrent",
+      "Left Overcurrent",
+      "Gyro",
+      "Roll Angle Rate X",
+      "Roll Angle Rate Y",
+      "Roll Angle Rate Z",
+      "LED 1 - Red",
+      "LED 1 - Green",
+      "LED 2 - Red",
+      "LED 2 - Green",
+      "Predefined Sound"
+    ]
+  }
+}

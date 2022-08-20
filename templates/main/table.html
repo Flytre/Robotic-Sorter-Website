@@ -1,0 +1,23 @@
+{% load table_utils %}
+
+<table id="machine-status-table">
+    <thead>
+    <tr>
+        <th> Key</th>
+        {% for heading_key, heading_value in headers.items %}
+            <th> {{ heading_value }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for datapoint_name, datapoint_value in data.items %}
+        <tr>
+            <td style="width: {{ headers|get_width_percent }}%">{{ datapoint_name }}</td>
+            {% for header in headers %}
+                <td style="width: {{ headers|get_width_percent }}%">{{ datapoint_value|get_item:header }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
